@@ -1,0 +1,140 @@
+// 색 토큰은 사이트(custom.scss)가 정의한 --hp-* 를 쓴다. transition 없음.
+.folder-index {
+  .folder-index__tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    margin-bottom: 28px;
+  }
+
+  // 버튼: 모노 11px 대문자, muted, 테두리 없음
+  .folder-index__button {
+    all: unset;
+    cursor: pointer;
+    font-family: var(--hp-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--hp-muted);
+    &:hover,
+    &[aria-expanded="true"] {
+      color: var(--hp-text);
+    }
+  }
+
+  // 필터 값 목록: 둥근 카드 없이 hairline 사각 박스
+  .folder-index__panel {
+    max-height: 18rem;
+    overflow-y: auto;
+    margin: -12px 0 24px;
+    border: 1px solid var(--hp-hairline);
+    background: var(--hp-bg);
+    &[hidden] {
+      display: none;
+    }
+  }
+  .folder-index__option {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-family: var(--hp-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--hp-muted);
+    &:hover,
+    &[aria-pressed="true"] {
+      color: var(--hp-text);
+    }
+  }
+  .folder-index__count {
+    color: var(--hp-muted);
+  }
+
+  // 헤더 행 (Topic | Notes (N), Date | Title | Type)
+  .folder-index__head {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    padding: 0 0 10px;
+    font-family: var(--hp-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--hp-muted);
+    &.folder-index__head--thoughts {
+      grid-template-columns: 140px minmax(0, 1fr) 120px;
+    }
+    // 모바일: 행(.folder-index__item)과 같은 열 폭으로 맞춘다
+    @media all and (max-width: 900px) {
+      grid-template-columns: 120px minmax(0, 1fr);
+      column-gap: 12px;
+      &.folder-index__head--thoughts {
+        grid-template-columns: 96px minmax(0, 1fr) 72px;
+      }
+    }
+  }
+
+  .folder-index__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid var(--hp-hairline);
+  }
+
+  .folder-index__item {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    align-items: baseline;
+    padding: 15px 0;
+    border-top: 1px solid var(--hp-hairline);
+    &.folder-index__item--thoughts {
+      grid-template-columns: 140px minmax(0, 1fr) 120px;
+    }
+    @media all and (max-width: 900px) {
+      grid-template-columns: 120px minmax(0, 1fr);
+      column-gap: 12px;
+      padding: 11px 0;
+      &.folder-index__item--thoughts {
+        grid-template-columns: 96px minmax(0, 1fr) 72px;
+      }
+    }
+  }
+
+  .folder-index__label {
+    font-family: var(--hp-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--hp-muted);
+  }
+
+  .folder-index__title {
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    background: none;
+    padding: 0;
+    color: var(--hp-text);
+    @media all and (max-width: 900px) {
+      font-size: 19px;
+    }
+  }
+
+  // 목록에 마우스를 올리면 모든 제목이 dim, 올린 행만 text (라벨도 text)
+  .folder-index__list:hover .folder-index__title {
+    color: var(--hp-dim);
+  }
+  .folder-index__list .folder-index__item:hover {
+    .folder-index__title,
+    .folder-index__label {
+      color: var(--hp-text);
+    }
+  }
+}

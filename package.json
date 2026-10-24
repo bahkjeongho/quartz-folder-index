@@ -1,0 +1,71 @@
+{
+  "name": "quartz-folder-index",
+  "version": "0.1.0",
+  "description": "Quartz component that renders Wiki and Thoughts folder pages as an index list with Topic/Region filters and sorting.",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./components": {
+      "import": "./dist/components/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "preact": "^10.0.0"
+  },
+  "dependencies": {
+    "@quartz-community/types": "github:quartz-community/types"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "esbuild": "^0.25.0",
+    "preact": "^10.28.2",
+    "sass": "^1.97.3",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3",
+    "vitest": "^2.1.9"
+  },
+  "quartz": {
+    "name": "folder-index",
+    "displayName": "Folder Index",
+    "category": [
+      "component"
+    ],
+    "version": "0.1.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [],
+    "defaultOrder": 50,
+    "defaultEnabled": true,
+    "defaultOptions": {},
+    "components": {
+      "FolderIndex": {
+        "displayName": "Folder Index",
+        "defaultPosition": "beforeBody",
+        "defaultPriority": 40
+      }
+    }
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "author": "bahkjeongho",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bahkjeongho/quartz-folder-index"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}

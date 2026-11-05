@@ -16,6 +16,7 @@ const index = {
   "2-wiki/no-meta": { filePath: "2 Wiki/No Meta.md", title: "No Meta" },
   "2-wiki/sub/index": { filePath: "2 Wiki/sub/index.md", title: "folder" },
   "2-wiki/folder-only": { title: "폴더 페이지" },
+  "2-wiki/23-k-pop-idol/rm": { filePath: "2 Wiki/23 K-Pop Idol/RM.md", title: "RM" },
   "3-object/31-music/x": { filePath: "3 Object/31 Music/x.md", title: "X" },
   "1-thoughts/index": { filePath: "1 Thoughts/index.md", title: "t" },
   "1-thoughts/a": { filePath: "1 Thoughts/A.md", title: "A" },
@@ -102,5 +103,13 @@ describe("cleanValues", () => {
   it("공백과 중복을 정리한다", () => {
     expect(cleanValues([" A ", "A", "", "http://x.com"])).toEqual(["A"]);
     expect(cleanValues(undefined)).toEqual([]);
+  });
+});
+
+describe("숨김 폴더", () => {
+  it("K-Pop 멤버 폴더의 노트는 Wiki 색인표에 넣지 않는다", () => {
+    const items = buildWikiItems(index, {});
+    expect(items.some((i) => i.slug.startsWith("2-wiki/23-k-pop-idol/"))).toBe(false);
+    expect(items.some((i) => i.slug === "2-wiki/alpha")).toBe(true);
   });
 });

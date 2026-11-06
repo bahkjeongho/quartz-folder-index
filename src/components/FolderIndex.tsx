@@ -8,7 +8,7 @@ import style from "./styles/folder-index.scss";
 // @ts-expect-error - inline script import handled by Quartz bundler
 import script from "./scripts/folder-index.inline.ts";
 
-/** 현재 페이지에서 사이트 루트로 가는 상대 경로. "index" → ".", "2-wiki/index" → ".." */
+/** 현재 페이지에서 사이트 루트로 가는 상대 경로. "index" → ".", "a_wiki/index" → ".." */
 function pathToRoot(slug: string): string {
   const depth = slug.replace(/^\/+|\/+$/g, "").split("/").length - 1;
   return depth <= 0 ? "." : Array(depth).fill("..").join("/");

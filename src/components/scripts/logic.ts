@@ -41,12 +41,13 @@ export function cleanValues(values: string[] | undefined): string[] {
   return [...seen];
 }
 
-/** 색인표에서 기본으로 숨기는 폴더(검색과 링크로는 열린다). K-Pop 그룹 멤버 개인 노트(23)와 학교 전공·프로그램 노트(24), 스포츠 팀 노트(25), 학술지 노트(26)가 모여 있다. */
+/** 색인표에서 기본으로 숨기는 폴더(검색과 링크로는 열린다). K-Pop 그룹 멤버 개인 노트(A2)와 학교 전공·프로그램 노트(A3), 스포츠 팀 노트(A5), 학술지 노트(A4), 허브(A1)가 모여 있다. */
 export const HIDDEN_PREFIXES = [
-  "2-wiki/23-k-pop-idol/",
-  "2-wiki/24-academic-program/",
-  "2-wiki/25-sports-team/",
-  "2-wiki/26-journal/",
+  "a_wiki/a1_hub/",
+  "a_wiki/a2_k-pop-idol/",
+  "a_wiki/a3_academic-program/",
+  "a_wiki/a4_journal/",
+  "a_wiki/a5_sports-team/",
 ];
 
 function isNote(slug: string, folder: string, entry: IndexEntry | undefined): boolean {
@@ -63,7 +64,7 @@ export function buildWikiItems(
 ): WikiItem[] {
   const items: WikiItem[] = [];
   for (const [slug, entry] of Object.entries(index)) {
-    if (!isNote(slug, "2-wiki", entry)) continue;
+    if (!isNote(slug, "a_wiki", entry)) continue;
     const m = meta[entry?.filePath ?? ""] ?? {};
     items.push({
       slug,
@@ -81,7 +82,7 @@ export function buildThoughtItems(
 ): ThoughtItem[] {
   const items: ThoughtItem[] = [];
   for (const [slug, entry] of Object.entries(index)) {
-    if (!isNote(slug, "1-thoughts", entry)) continue;
+    if (!isNote(slug, "c_blog", entry)) continue;
     const m = meta[entry?.filePath ?? ""] ?? {};
     items.push({
       slug,

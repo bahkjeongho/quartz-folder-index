@@ -4,8 +4,8 @@ createRequire(import.meta.url);
 
 // src/types.ts
 var FOLDER_PAGES = {
-  "2-wiki/index": "wiki",
-  "1-thoughts/index": "thoughts"
+  "a_wiki/index": "wiki",
+  "c_blog/index": "thoughts"
 };
 
 export { FOLDER_PAGES };

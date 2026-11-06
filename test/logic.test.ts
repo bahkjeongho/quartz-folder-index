@@ -9,44 +9,45 @@ import {
 } from "../src/components/scripts/logic";
 
 const index = {
-  "2-wiki/index": { filePath: "2 Wiki/index.md", title: "Hide Park" },
-  "2-wiki/bureau-borsche": { filePath: "2 Wiki/Bureau Borsche.md", title: "Bureau Borsche" },
-  "2-wiki/cc-co": { filePath: "2 Wiki/CC Co..md", title: "CC Co." },
-  "2-wiki/alpha": { filePath: "2 Wiki/Alpha.md", title: "Alpha" },
-  "2-wiki/no-meta": { filePath: "2 Wiki/No Meta.md", title: "No Meta" },
-  "2-wiki/sub/index": { filePath: "2 Wiki/sub/index.md", title: "folder" },
-  "2-wiki/folder-only": { title: "폴더 페이지" },
-  "2-wiki/23-k-pop-idol/rm": { filePath: "2 Wiki/23 K-Pop Idol/RM.md", title: "RM" },
-  "2-wiki/26-journal/antikythera": { filePath: "2 Wiki/26 Journal/Antikythera.md", title: "Antikythera" },
-  "2-wiki/25-sports-team/chicago-cubs": { filePath: "2 Wiki/25 Sports Team/Chicago Cubs.md", title: "Chicago Cubs" },
-  "2-wiki/24-academic-program/ma-fashion": { filePath: "2 Wiki/24 Academic Program/MA Fashion.md", title: "MA Fashion" },
-  "3-object/31-music/x": { filePath: "3 Object/31 Music/x.md", title: "X" },
-  "1-thoughts/index": { filePath: "1 Thoughts/index.md", title: "t" },
-  "1-thoughts/a": { filePath: "1 Thoughts/A.md", title: "A" },
-  "1-thoughts/b": { filePath: "1 Thoughts/B.md", title: "B" },
-  "1-thoughts/c": { filePath: "1 Thoughts/C.md", title: "C" },
+  "a_wiki/index": { filePath: "A_Wiki/index.md", title: "Hide Park" },
+  "a_wiki/bureau-borsche": { filePath: "A_Wiki/Bureau Borsche.md", title: "Bureau Borsche" },
+  "a_wiki/cc-co": { filePath: "A_Wiki/CC Co..md", title: "CC Co." },
+  "a_wiki/alpha": { filePath: "A_Wiki/Alpha.md", title: "Alpha" },
+  "a_wiki/no-meta": { filePath: "A_Wiki/No Meta.md", title: "No Meta" },
+  "a_wiki/sub/index": { filePath: "A_Wiki/sub/index.md", title: "folder" },
+  "a_wiki/folder-only": { title: "폴더 페이지" },
+  "a_wiki/a1_hub/design": { filePath: "A_Wiki/A1_Hub/Design.md", title: "Design" },
+  "a_wiki/a2_k-pop-idol/rm": { filePath: "A_Wiki/A2_K-Pop Idol/RM.md", title: "RM" },
+  "a_wiki/a4_journal/antikythera": { filePath: "A_Wiki/A4_Journal/Antikythera.md", title: "Antikythera" },
+  "a_wiki/a5_sports-team/chicago-cubs": { filePath: "A_Wiki/A5_Sports Team/Chicago Cubs.md", title: "Chicago Cubs" },
+  "a_wiki/a3_academic-program/ma-fashion": { filePath: "A_Wiki/A3_Academic Program/MA Fashion.md", title: "MA Fashion" },
+  "b_object/b1_music/x": { filePath: "B_Object/B1_Music/x.md", title: "X" },
+  "c_blog/index": { filePath: "C_Blog/index.md", title: "t" },
+  "c_blog/a": { filePath: "C_Blog/A.md", title: "A" },
+  "c_blog/b": { filePath: "C_Blog/B.md", title: "B" },
+  "c_blog/c": { filePath: "C_Blog/C.md", title: "C" },
 };
 
 const meta = {
-  "2 Wiki/Bureau Borsche.md": { topics: ["Design Studio"], regions: ["Germany", "Munich"] },
-  "2 Wiki/CC Co..md": { topics: ["Creative Company", "Design Studio"], regions: ["UK", "London"] },
-  "2 Wiki/Alpha.md": { topics: ["https://example.com", "Photographer"] },
-  "1 Thoughts/A.md": { date: "2026-10-01", type: "Essay" },
-  "1 Thoughts/B.md": { date: "2026-10-20", type: "Critique" },
+  "A_Wiki/Bureau Borsche.md": { topics: ["Design Studio"], regions: ["Germany", "Munich"] },
+  "A_Wiki/CC Co..md": { topics: ["Creative Company", "Design Studio"], regions: ["UK", "London"] },
+  "A_Wiki/Alpha.md": { topics: ["https://example.com", "Photographer"] },
+  "C_Blog/A.md": { date: "2026-10-01", type: "Essay" },
+  "C_Blog/B.md": { date: "2026-10-20", type: "Critique" },
 };
 
 describe("buildWikiItems", () => {
   const items = buildWikiItems(index, meta);
   it("Wiki 노트만 모은다 (폴더 index, 폴더 페이지, 다른 분야 제외)", () => {
     expect(items.map((i) => i.slug).sort()).toEqual([
-      "2-wiki/alpha",
-      "2-wiki/bureau-borsche",
-      "2-wiki/cc-co",
-      "2-wiki/no-meta",
+      "a_wiki/alpha",
+      "a_wiki/bureau-borsche",
+      "a_wiki/cc-co",
+      "a_wiki/no-meta",
     ]);
   });
   it("주소 모양의 topic 값은 버린다", () => {
-    expect(items.find((i) => i.slug === "2-wiki/alpha")?.topics).toEqual(["Photographer"]);
+    expect(items.find((i) => i.slug === "a_wiki/alpha")?.topics).toEqual(["Photographer"]);
   });
 });
 
@@ -112,10 +113,11 @@ describe("cleanValues", () => {
 describe("숨김 폴더", () => {
   it("K-Pop 멤버 폴더의 노트는 Wiki 색인표에 넣지 않는다", () => {
     const items = buildWikiItems(index, {});
-    expect(items.some((i) => i.slug.startsWith("2-wiki/23-k-pop-idol/"))).toBe(false);
-    expect(items.some((i) => i.slug.startsWith("2-wiki/24-academic-program/"))).toBe(false);
-    expect(items.some((i) => i.slug.startsWith("2-wiki/25-sports-team/"))).toBe(false);
-    expect(items.some((i) => i.slug.startsWith("2-wiki/26-journal/"))).toBe(false);
-    expect(items.some((i) => i.slug === "2-wiki/alpha")).toBe(true);
+    expect(items.some((i) => i.slug.startsWith("a_wiki/a1_hub/"))).toBe(false);
+    expect(items.some((i) => i.slug.startsWith("a_wiki/a2_k-pop-idol/"))).toBe(false);
+    expect(items.some((i) => i.slug.startsWith("a_wiki/a3_academic-program/"))).toBe(false);
+    expect(items.some((i) => i.slug.startsWith("a_wiki/a5_sports-team/"))).toBe(false);
+    expect(items.some((i) => i.slug.startsWith("a_wiki/a4_journal/"))).toBe(false);
+    expect(items.some((i) => i.slug === "a_wiki/alpha")).toBe(true);
   });
 });
